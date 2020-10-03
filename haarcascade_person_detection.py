@@ -2,8 +2,10 @@ import numpy as np
 import cv2
 
 fullbody_cascade = cv2.CascadeClassifier('haarcascade_fullbody.xml')
+#fullbody_cascade = cv2.CascadeClassifier('pedestrian.xml')
+video_src = 'people.mp4'
 
-cap = cv2.VideoCapture.open("people.mp4")
+cap = cv2.VideoCapture(video_src)
 
 while 1:
     ret, img = cap.read()
@@ -16,8 +18,7 @@ while 1:
         roi_color = img[y:y+h, x:x+w]
 
     cv2.imshow('img',img)
-    k = cv2.waitKey(30) & 0xff
-    if k == 27:
+    if cv2.waitKey(33) == 27:
         break
 
 cap.release()
