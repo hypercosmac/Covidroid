@@ -2,7 +2,6 @@ import numpy as np
 import cv2
 
 fullbody_cascade = cv2.CascadeClassifier('haarcascade_fullbody.xml')
-#fullbody_cascade = cv2.CascadeClassifier('pedestrian.xml')
 video_src = 'people.mp4'
 
 cap = cv2.VideoCapture(video_src)
