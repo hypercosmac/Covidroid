@@ -1,8 +1,24 @@
 MODEL_PATH = "yolo_model/"
 NMS_THRESH = 0.3
 MIN_CONF = 0.3
+USE_GPU = False
+MIN_DISTANCE = 50
+
 import numpy as np
+import argparse
+import imutils
 import cv2
+import os
+
+ap = argparse.ArgumentParser()
+ap.add_argument("-i", "--input", type=str, default="people.mp4",
+    help="path to (optional) input video file")
+ap.add_argument("-o", "--output", type=str, default="model_output.avi",
+    help="path to (optional) output video file")
+ap.add_argument("-d", "--display", type=int, default=1,
+    help="whether or not output frame should be displayed")
+args = vars(ap.parse_args())
+
 def detect_people(frame, net, ln, personIdx=0):
     # grab dimensions of the frame and initialize the list of results
     (H, W) = frame.shape[:2]
@@ -50,15 +66,6 @@ def detect_people(frame, net, ln, personIdx=0):
     # return the list of results
     return results
 
-# construct the argument parse and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--input", type=str, default="people.mp4",
-    help="path to (optional) input video file")
-ap.add_argument("-o", "--output", type=str, default="model_output.avi",
-    help="path to (optional) output video file")
-ap.add_argument("-d", "--display", type=int, default=1,
-    help="whether or not output frame should be displayed")
-args = vars(ap.parse_args())
 # load the COCO class labels
 labelsPath = os.path.sep.join([config.MODEL_PATH, "coco.names"])
 LABELS = open(labelsPath).read().strip().split("\n")
