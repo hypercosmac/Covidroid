@@ -1,4 +1,4 @@
-MODEL_PATH = "yolo_model/"
+MODEL_PATH = "yolo_model"
 NMS_THRESH = 0.3
 MIN_CONF = 0.3
 USE_GPU = False
@@ -67,11 +67,11 @@ def detect_people(frame, net, ln, personIdx=0):
     return results
 
 # load the COCO class labels
-labelsPath = os.path.sep.join([config.MODEL_PATH, "coco.names"])
+labelsPath = os.path.sep.join([MODEL_PATH, "coco.names"])
 LABELS = open(labelsPath).read().strip().split("\n")
 # the paths to the YOLO weights
-weightsPath = os.path.sep.join([config.MODEL_PATH, "yolov4.weights"])
-configPath = os.path.sep.join([config.MODEL_PATH, "yolov4.cfg"])
+weightsPath = os.path.sep.join([MODEL_PATH, "yolov4.weights"])
+configPath = os.path.sep.join([MODEL_PATH, "yolov4.cfg"])
 # load our YOLO object detector trained on COCO dataset
 print("[INFO] loading YOLO from disk...")
 net = cv2.dnn.readNetFromDarknet(configPath, weightsPath)
